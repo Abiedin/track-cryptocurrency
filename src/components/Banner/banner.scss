@@ -1,0 +1,68 @@
+.banner {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-image: url(../../../public/banner2.jpg);
+    color: white;
+}
+
+.banner__conteiner {
+    color: white;
+    height: 100%;
+    font-weight: bold;
+    font-family: Montserrat;
+}
+
+.tagline {
+    display: flex;
+    height: 40%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+.tagline h2 {
+    font-weight: 600;
+}
+
+.banner__subtitle {
+    color:darkgray;
+    font-family: Montserrat;
+    text-transform: capitalize;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    height: 60%;
+}
+
+.carousel-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.carousel-img {
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.carousel-symbol {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.profit-long{
+    color: rgb(78, 197, 54);
+}
+.profit-short{
+    color: red;
+}
