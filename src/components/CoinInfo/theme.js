@@ -1,8 +1,11 @@
 import { createTheme } from '@mui/material';
 
-export const themeHeader = createTheme({
+export const theme = createTheme({
   palette: {
-    mode: 'dark',
+    primery: {
+      main: "#fff",
+    },
+    type: 'dark',
   },
   breakpoints: {
     value: {

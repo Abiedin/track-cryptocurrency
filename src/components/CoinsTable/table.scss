@@ -3,6 +3,22 @@
   color: white;
 }
 
-.coins-tablerow-link {
-  text-decoration: none;
+.coins-tablerow {
+  background-color: #2a2b31;
+  transition-duration: 0.3s;
+  
+  &:hover {
+    background-color: #272323;
+  }
+}
+
+.coins-pagination {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  & .MuiPaginationItem-root {
+    color: gold;
+  }
 }

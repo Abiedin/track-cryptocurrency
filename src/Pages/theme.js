@@ -1,11 +1,9 @@
 import { createTheme } from '@mui/material';
 
-export const themeHeader = createTheme({
-  palette: {
-    mode: 'dark',
-  },
+export const theme = createTheme({
+ 
   breakpoints: {
-    value: {
+    values: {
       mobile: 0,
       tablet: 768,
       laptop: 1024,

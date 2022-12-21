@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import {
   LinearProgress,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -24,25 +25,27 @@ const CoinsTable = () => {
   const [coins, setCoin] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+
   const curr = useSelector((state) => state.cur.exchangeArr);
-  const doll = useSelector((state) => state.cur.doll);
+  const symbolDoll = useSelector((state) => state.cur.doll);
 
   const fetchCoins = async () => {
     setLoading(true);
 
     const { data } = await axios.get(
-      coins ? CoinList("USD") : CoinList(curr.currency)
+      coins.length > 0 ? CoinList(curr.currency) : CoinList('USD')
     );
 
     setCoin(data);
     setLoading(false);
   };
 
-  console.log(coins)
+  console.log(coins);
 
   useEffect(() => {
     fetchCoins();
-  }, [curr]);
+  }, []);
 
   const handleSearch = () => {
     return coins?.filter(
@@ -87,16 +90,22 @@ const CoinsTable = () => {
               </TableHead>
 
               <TableBody>
-                {handleSearch().map((row) => {
-                  const profit = row.price_change_percentage_24h > 0;
-                  
+                {handleSearch()
+                  .slice((page - 1) * 10, (page - 1) * 10 + 10)
+                  .map((row) => {
+                    const profit = row.price_change_percentage_24h > 0;
 
-                  return (
-                    <TableRow className="coins-tablerow" key={row.name} component={Link} to={`/coins/${row.id}`}>
-                      <TableCell
+                    return (
+                      <TableRow
+                        className="coins-tablerow"
+                        key={row.name}
+                        component={Link}
+                        to={`/coins/${row.id}`}
+                      >
+                        <TableCell
                           component="th"
                           scope="row"
-                          styles={{ display: 'flex', gap: 15 }}
+                          style={{ display: 'flex', gap: 15 }}
                         >
                           <img
                             src={row.image}
@@ -119,37 +128,45 @@ const CoinsTable = () => {
                               {row.name}
                             </span>
                           </div>
-                      </TableCell>
-                      <TableCell align="right">
-                        {curr.symbol ? curr.symbol : doll}{' '}
-                        {numberWidthCommas(
-                          row.current_price.toFixed(2)
-                        )}
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        style={{
-                          color: profit > 0 ? 'rgb(14, 203, 129)' : 'red',
-                          fontWeight: 500,
-                        }}
-                      >
-                        {profit && '+'}
-                        {row.price_change_percentage_24h.toFixed(2)}%
-                      </TableCell>
-                      <TableCell align="right">
-                        {curr.symbol ? curr.symbol : doll}{' '}
-                        {numberWidthCommas(
-                          row.market_cap.toString().slice(0, -6)
-                        )}
-                        {' '}M
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                        </TableCell>
+                        <TableCell align="right">
+                          {curr.symbol ? curr.symbol : symbolDoll}{' '}
+                          {numberWidthCommas(row.current_price.toFixed(2))}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          style={{
+                            color: profit > 0 ? 'rgb(14, 203, 129)' : 'red',
+                            fontWeight: 500,
+                          }}
+                        >
+                          {profit && '+'}
+                          {row.price_change_percentage_24h.toFixed(2)}%
+                        </TableCell>
+                        <TableCell align="right">
+                          {curr.symbol ? curr.symbol : symbolDoll}{' '}
+                          {numberWidthCommas(
+                            row.market_cap.toString().slice(0, -6)
+                          )}{' '}
+                          M
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
           )}
         </TableContainer>
+        <Pagination
+          count={(handleSearch()?.length / 10).toFixed(0)}
+          className="coins-pagination"
+          onChange={(_, value) => {
+            setPage(value);
+            window.scroll(0, 520);
+          }}
+        >
+          {' '}
+        </Pagination>
       </Container>
     </ThemeProvider>
   );

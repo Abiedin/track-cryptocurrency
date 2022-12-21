@@ -23,7 +23,7 @@ const Carousel = () => {
 
   useEffect(() => {
     fetchTrendingCoins();
-  }, [curr]);
+  }, []);
 
   const responsive = {
     0: {
