@@ -2,7 +2,7 @@ import { CircularProgress } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useSelector } from 'react-redux';
 import { HistoricalChart } from '../../Config/api';
@@ -64,7 +64,8 @@ const CoinInfo = ({ coin }) => {
           />
         ) : (
           <>
-            <Line
+         
+            <Bar
               data={{
                 labels: historicDate.map((coin) => {
                   let date = new Date(coin[0]);
@@ -85,6 +86,7 @@ const CoinInfo = ({ coin }) => {
                     borderColor: '#EEBC1D',
                   },
                 ],
+               
               }}
               options={{
                 elements: {

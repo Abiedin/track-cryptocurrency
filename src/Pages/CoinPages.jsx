@@ -84,10 +84,6 @@ const CoinPages = () => {
     fetchCoin();
   }, []);
 
-  console.log(coin);
-  console.log('curr.currency =', curr?.currency);
-  console.log('curr.symbol =', curr?.symbol);
-
   useEffect(() => {
     const handleResize = () => {
       setW(window.innerWidth);
