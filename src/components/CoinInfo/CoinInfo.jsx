@@ -57,7 +57,22 @@ const CoinInfo = ({ coin }) => {
     <ThemeProvider theme={theme}>
       <Container>
         {!historicDate ? (
-       
+          <CircularProgress
+            style={{ color: 'gold' }}
+            size={250}
+            thickness={1}
+          />
+        ) : (
+          <>
+         
+            <Bar
+              data={{
+                labels: historicDate.map((coin) => {
+                  let date = new Date(coin[0]);
+                  let time =
+                    date.getHours() > 12
+                      ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                      : `${date.getHours()}:${date.getMinutes()} AM`;
 
                   return days === 1 ? time : date.toLocaleDateString();
                 }),
