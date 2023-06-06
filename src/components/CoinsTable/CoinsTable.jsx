@@ -32,13 +32,20 @@ const CoinsTable = () => {
 
   const fetchCoins = async () => {
     setLoading(true);
+    const datacur = JSON.parse(localStorage.getItem('datacur'));
 
-    const { data } = await axios.get(
-      coins.length > 0 ? CoinList(curr.currency) : CoinList('USD')
-    );
+    if (!datacur.length) {
+      const { data } = await axios.get(
+        coins.length > 0 ? CoinList(curr.currency) : CoinList('USD')
+      );
 
-    setCoin(data);
-    setLoading(false);
+      localStorage.setItem('datacur', JSON.stringify(data));
+      setCoin(data);
+      setLoading(false);
+    } else {
+      setCoin(datacur);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -48,8 +55,8 @@ const CoinsTable = () => {
   const handleSearch = () => {
     return coins?.filter(
       (coin) =>
-        coin.name.toLowerCase().includes(search) ||
-        coin.symbol.toLowerCase().includes(search)
+        coin.name.toLowerCase().includes(search.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(search.toLowerCase())
     );
   };
 
