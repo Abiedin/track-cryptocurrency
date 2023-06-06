@@ -34,20 +34,6 @@ const CoinsTable = () => {
     setLoading(true);
     const datacur = JSON.parse(localStorage.getItem('datacur'));
 
-    if (!datacur) {
-      const { data } = await axios.get(
-        coins.length > 0 ? CoinList(curr.currency) : CoinList('USD')
-      );
-
-      localStorage.setItem('datacur', JSON.stringify(data));
-      setCoin(data);
-      setLoading(false);
-    } else {
-      setCoin(datacur);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchCoins();
   }, []);
