@@ -23,6 +23,7 @@ const Container = styled('div')(({ theme }) => ({
     marginTop: 0,
     padding: 20,
     paddingTop: 0,
+    border: '3px solid re',
   },
   [theme.breakpoints.down('laptop')]: {
     display: 'flex',

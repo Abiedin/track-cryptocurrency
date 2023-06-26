@@ -53,6 +53,8 @@ const MarketData = styled('div')(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.down('desktop')]: {
     alignItems: 'start',
+   
+    border: '3px solid red',
   },
   [theme.breakpoints.down('laptop')]: {
     display: 'flex',
